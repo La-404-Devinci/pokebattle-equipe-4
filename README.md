@@ -8,3 +8,7 @@ Pour cela, les technologies choisies seront :
     • Optionnel : intégrer les WebSockets (pour ajouter le temps réel à une partie)
 
 tips : créez des branches pour travailler dessus c'est une bonne habitude à prendre au plus tôt
+
+
+npm install
+npm run dev
