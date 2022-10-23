@@ -19,14 +19,14 @@
 
     <div class="battle-scene">
         <div class="box-top-left">
-        <h2 class="pokemon"></h2>
+        <h2 class="pokemon-name" id="wild-name"></h2>
         <div class="hp-bar-top">
         <div class="hp-bar-fill"></div>
         </div>
-        <h4 class="level"></h4>
+        <h4 class="level">N.100</h4>
     </div>
     <div class="box-top-right">
-        <img class="pokemon-top" />
+        <img class="pokemon-top" id="wild-sprite"/>
     </div>
         <div class="box-bottom-left">
         <!-- emplacement pour le pokemon du joueur -->
@@ -35,19 +35,20 @@
     <div class="box-bottom-right">
         <h2 class="pokemon-name" id="pokemon-name"></h2>
         <div class="hp-bar-bottom">
-        <div class="hp-bar-fill"></div>
+        <div class="hp-bar-fill" id="player-health-bar"></div>
         </div>
         <h4 class="level">N.100</h4>
         <h4 class="hp" id="hp"></h4>
     </div>
     <div class="bottom-menu">
-        <div class="battle-text text-box-left">
+        <div class="battle-text text-box-left" id="narrator-txt">
+        
         </div>
         <div class="text-box-right">
-            <h4 class="battle-text-top-left"></h4>
-            <h4 class="battle-text-bottom-left"></h4>
-            <h4 class="battle-text-top-right"></h4>
-            <h4 class="battle-text-bottom-right"></h4>   
+            <h4 class="battle-text-top-left" id="attack1"></h4>
+            <h4 class="battle-text-bottom-left" id="attack2"></h4>
+            <h4 class="battle-text-top-right" id="attack3"></h4>
+            <h4 class="battle-text-bottom-right" id="attack4"></h4>   
         </div>
     </div>
 

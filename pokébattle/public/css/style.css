@@ -71,6 +71,7 @@ body {
   height: 100%;
   border-radius: 20px;
   background: #FF8800;
+
 }
 
 .box-top-right{
@@ -194,7 +195,7 @@ body {
   font-size: 22px;
   color: #333333;
   top: -30%;
-  left: 10%;
+  left: 5%;
   text-align: left;
   font-family: "PT Sans Narrow";
   cursor: pointer;
@@ -206,7 +207,7 @@ body {
   font-size: 22px;
   color: #333333;
   bottom: -30%;
-  left: 10%;
+  left: 5%;
   text-align: left;
   font-family: "PT Sans Narrow";
   cursor: pointer;
@@ -218,7 +219,7 @@ body {
   font-size: 22px;
   color: #333333;
   top: -30%;
-  right: 21%;
+  right: 5%;
   text-align: left;
   font-family: "PT Sans Narrow";
   cursor: pointer;
@@ -230,7 +231,7 @@ body {
   font-size: 22px;
   color: #333333;
   bottom: -30%;
-  right: 20%;
+  right: 5%;
   text-align: left;
   font-family: "PT Sans Narrow";
   cursor: pointer;
