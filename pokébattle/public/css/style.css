@@ -237,8 +237,39 @@ body {
   cursor: pointer;
 } 
 
+
+
+/*animations */
+.attack{
+  animation-duration: .3s;
+  animation-name: attack;
+  animation-iteration-count: 3;
+  transition: none;
+}
+
+@keyframes attack {
+  0% {transform: translateX(0px);}
+  50% {transform: translateX(10px);}
+  100% {transform: translateX(0px);}
+}
+
+.damaged {
+  animation-duration: .3s;
+  animation-name: clignoter;
+  animation-iteration-count: 3;
+  transition: none;
+}
+@keyframes clignoter {
+  0%   { opacity:1; }
+  40%   {opacity:0; }
+  100% { opacity:1; }
+}
+
+
+/*media queries*/
+
 @media all and (max-width: 600px) {
- .battle-scene{
+  .battle-scene{
   position: relative;
   margin: auto;
   display: block;
@@ -281,13 +312,14 @@ body {
   
   .hp{
   position: absolute;
-  right: 8%;
+  right: 6%;
   bottom: -20%;
   opacity: 0.7;
   font-size: 11px;
   font-family: "Roboto Condensed";
 }
-  
+
+
   
 .battle-text-top-left{
   opacity: 0.95;
@@ -346,6 +378,7 @@ body {
   text-align: left;
   font-family: "PT Sans Narrow";
 }
+
 
 
 

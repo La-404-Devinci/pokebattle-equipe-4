@@ -50,7 +50,6 @@ function PokemonBattle(data) {
     const hp = document.getElementById("hp");
     actualHp = data.stats[0].base_stat;
     hp.textContent = actualHp + " / " + data.stats[0].base_stat;
-    console.log(actualHp);
 
     //class hp-bar-fill ,  ajouter une width à 100% si actualHp = data.stats[0].base_stat mettre la couleur en vert
     const hpBar = document.getElementById("player-health-bar");
@@ -67,6 +66,11 @@ function PokemonBattle(data) {
     else if (actualHp === data.stats[0].base_stat / 4) {
         hpBar.style.width = "25%";
         hpBar.style.backgroundColor = "#FF0000";//rouge
+    }
+
+    //les hp du pokemon ne peuvent pas être négatifs
+    if (actualHp < 0) {
+        actualHp = 0;
     }
 
 
@@ -95,28 +99,124 @@ function PokemonBattle(data) {
     const wildPokemon = document.getElementById("wild-pokemon");
     const wildPokemonSprite = document.getElementById("wild-sprite");
     const wildPokemonName = document.getElementById("wild-name");
-    const wildPokemonHp = document.getElementById("wild-pokemon-hp");
-    const wildPokemonHpBar = document.getElementById("wild-pokemon-hp-bar");
-    const wildPokemonAttack1 = document.getElementById("wild-pokemon-attack1");
-    const wildPokemonAttack2 = document.getElementById("wild-pokemon-attack2");
-    const wildPokemonAttack3 = document.getElementById("wild-pokemon-attack3");
-    const wildPokemonAttack4 = document.getElementById("wild-pokemon-attack4");
+
 
      //on récupère un pokémon sauvage aléatoire
     const randomWildPokemon = Math.floor(Math.random() * 1000);
     const wildPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${randomWildPokemon}`;
     fetch(wildPokemonUrl)
         .then(response => response.json())
-        .then(data => {
-            wildPokemonSprite.src = data.sprites.front_default;
-            wildPokemonName.textContent = data.name;
-            wildPokemonHp.textContent = data.stats[0].base_stat;
-            wildPokemonHpBar.style.width = `${data.stats[0].base_stat}%`;
-            wildPokemonAttack1.textContent = data.moves[0].move.name;
-            wildPokemonAttack2.textContent = data.moves[1].move.name;
-            wildPokemonAttack3.textContent = data.moves[2].move.name;
-            wildPokemonAttack4.textContent = data.moves[3].move.name;
+        .then( wild_data => {
+            wildPokemonSprite.src = wild_data.sprites.front_default;
+            wildPokemonSprite.alt = wild_data.name;
+            wildPokemonName.textContent = wild_data.name;
+        //on récupère les attaques du pokémon sauvage
+        const wildAttacks = wild_data.moves;
+        //on récupère les attaques aléatoirement
+        const randomWildAttacks = [];
+        for (let i = 0; i < 4; i++) {
+            const randomWildAttack = wildAttacks[Math.floor(Math.random() * wildAttacks.length)];
+            randomWildAttacks.push(randomWildAttack);
+
+            // à chaque fois qu'on clique sur une attaque 
+            attack1.addEventListener("click", () => {
+                narrator.textContent = `${data.name} utilise ${attack1.textContent} !`;
+                //animation de l'attaque sur le sprite du pokémon du joueur
+                sprite.classList.add("attack");
+                wildPokemonSprite.classList.add("damaged");
+
+                setTimeout(() => {
+                    narrator.textContent = `${wildPokemonName.textContent} utilise ${randomWildAttacks[0].move.name} !`;
+                    //animation de l'attaque sur le sprite du pokémon sauvage
+                    wildPokemonSprite.classList.add("attack");
+                    sprite.classList.add("damaged");
+                }, 3000);
+                setTimeout(() => {
+                    narrator.textContent = `Choisis une attaque !`;
+                }, 6000);
+            });
+            attack2.addEventListener("click", () => {
+                narrator.textContent = `${data.name} utilise ${attack2.textContent} !`;
+                //animation de l'attaque sur le sprite du pokémon du joueur
+                sprite.classList.add("attack");
+                wildPokemonSprite.classList.add("damaged");
+                setTimeout(() => {
+                    narrator.textContent = `${wildPokemonName.textContent} utilise ${randomWildAttacks[1].move.name} !`;
+                    //animation de l'attaque sur le sprite du pokémon sauvage
+                    wildPokemonSprite.classList.add("attack");
+                    sprite.classList.add("damaged");
+                }, 3000);
+                setTimeout(() => {
+                    narrator.textContent = `Choisis une attaque !`;
+                }, 6000);
+            });
+            attack3.addEventListener("click", () => {
+                narrator.textContent = `${data.name} utilise ${attack3.textContent} !`;
+                //animation de l'attaque sur le sprite du pokémon du joueur
+                sprite.classList.add("attack");
+                wildPokemonSprite.classList.add("damaged");
+
+                setTimeout(() => {
+                    narrator.textContent = `${wildPokemonName.textContent} utilise ${randomWildAttacks[2].move.name} !`;
+                    //animation de l'attaque sur le sprite du pokémon sauvage
+                    wildPokemonSprite.classList.add("attack");
+                    sprite.classList.add("damaged");
+                }, 3000);
+                setTimeout(() => {
+                    narrator.textContent = `Choisis une attaque !`;
+                }, 6000);
+            });
+            attack4.addEventListener("click", () => {
+                narrator.textContent = `${data.name} utilise ${attack4.textContent} !`;
+                //animation de l'attaque sur le sprite du pokémon du joueur
+                sprite.classList.add("attack");
+                wildPokemonSprite.classList.add("damaged");
+                setTimeout(() => {
+                    narrator.textContent = `${wildPokemonName.textContent} utilise ${randomWildAttacks[3].move.name} !`;
+                    //animation de l'attaque sur le sprite du pokémon sauvage
+                    wildPokemonSprite.classList.add("attack");
+                    sprite.classList.add("damaged");
+                }, 3000);
+                setTimeout(() => {
+                    narrator.textContent = `Choisis une attaque !`;
+                }, 6000);
+            });
+
+        }
+
+        
+
+            //affichage des pv du pokémon sauvage
+            const wildHp = document.getElementById("wild-hp");
+            wildActualHp = wild_data.stats[0].base_stat;
+            wildHp.textContent = wildActualHp + " / " + wild_data.stats[0].base_stat;
+            console.log( "pv actuels pokémon sauvage : " + wildActualHp);
+            console.log("pv actuels pokémon joueur : " + actualHp);
+
+            //class hp-bar-fill ,  ajouter une width à 100% si actualHp = data.stats[0].base_stat mettre la couleur en vert
+            const wildHpBar = document.getElementById("wild-health-bar");
+            if (wildActualHp === wild_data.stats[0].base_stat) {
+                wildHpBar.style.width = "100%";
+                wildHpBar.style.backgroundColor = "#00FF00";//vert
+            }
+            //si actualHp = data.stats[0].base_stat / 2 mettre la couleur en orange
+            else if (wildActualHp === wild_data.stats[0].base_stat / 2) {
+                wildHpBar.style.width = "50%";
+                wildHpBar.style.backgroundColor = "#FFA500";//orange
+            }
+            //si actualHp = 25% de data.stats[0].base_stat mettre la couleur en rouge
+            else if (wildActualHp === wild_data.stats[0].base_stat / 4) {
+                wildHpBar.style.width = "25%";
+                wildHpBar.style.backgroundColor = "#FF0000";//rouge
+            }
+
+            //les hp du pokemon ne peuvent pas être négatifs
+            if (wildActualHp < 0) {
+                wildActualHp = 0;
+            }
+
         });
+        
 
 
     //texte du narrateur
@@ -141,105 +241,61 @@ function PokemonBattle(data) {
     }, 6000);
 
 
-    // au clic sur une attaque
+
+    //si on clique sur une attaque on désactive les attaques pour ne pas pouvoir cliquer plusieurs fois
     attack1.addEventListener("click", () => {
-        narrator.textContent = `${data.name} utilise ${attack1.textContent} !`;
-        setTimeout(() => {
-            narrator.textContent = `C'est super efficace !`;
-        }, 1000);
-        
-
-    });
-    attack2.addEventListener("click", () => {
-        narrator.textContent = `${data.name} utilise ${attack2.textContent} !`;
-        setTimeout(() => {
-            narrator.textContent = `C'est super efficace !`;
-        }, 1000);
-    });
-    attack3.addEventListener("click", () => {
-        narrator.textContent = `${data.name} utilise ${attack3.textContent} !`;
-        setTimeout(() => {
-            narrator.textContent = `C'est super efficace !`;
-        }, 1000);
-    });
-    attack4.addEventListener("click", () => {
-        narrator.textContent = `${data.name} utilise ${attack4.textContent} !`;
-        setTimeout(() => {
-            narrator.textContent = `C'est super efficace !`;
-        }, 1000);
-    });
-
-
-    
-
-
-
-
-
-
-    //si on clique sur une attaque on bouge le sprite du pokémon vers la droite puis on le fait revenir à sa position initiale
-    attack1.addEventListener("click", () => {
-        sprite.style.transform = "translateX(50px)";
         attack1.style.display = "none";
         attack2.style.display = "none";
         attack3.style.display = "none";
         attack4.style.display = "none";
         setTimeout(() => {
-            sprite.style.transform = "translateX(0px)";
             attack1.style.display = "block";
             attack2.style.display = "block";
             attack3.style.display = "block";
             attack4.style.display = "block";
-        }, 500);
+        }, 7000);
     }
     );
     attack2.addEventListener("click", () => {
-        sprite.style.transform = "translateX(50px)";
         attack1.style.display = "none";
         attack2.style.display = "none";
         attack3.style.display = "none";
         attack4.style.display = "none";
         setTimeout(() => {
-            sprite.style.transform = "translateX(0px)";
             attack1.style.display = "block";
             attack2.style.display = "block";
             attack3.style.display = "block";
             attack4.style.display = "block";
 
-        }, 500);
+        }, 7000);
     }
     );
     attack3.addEventListener("click", () => {
-        sprite.style.transform = "translateX(50px)";
         attack1.style.display = "none";
         attack2.style.display = "none";
         attack3.style.display = "none";
         attack4.style.display = "none";
         setTimeout(() => {
-            sprite.style.transform = "translateX(0px)";
             attack1.style.display = "block";
             attack2.style.display = "block";
             attack3.style.display = "block";
             attack4.style.display = "block";
-        }, 500);
+        }, 7000);
     }
     );
     attack4.addEventListener("click", () => {
-        sprite.style.transform = "translateX(50px)";
         attack1.style.display = "none";
         attack2.style.display = "none";
         attack3.style.display = "none";
         attack4.style.display = "none";
         setTimeout(() => {
-            sprite.style.transform = "translateX(0px)";
             attack1.style.display = "block";
             attack2.style.display = "block";
             attack3.style.display = "block";
             attack4.style.display = "block";
-        }, 500);
+        }, 7000);
     }
     );
 
 
-   
 }
