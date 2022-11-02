@@ -39,7 +39,7 @@ fetch(selectedPokemon)
 //affichage du sprite back du pokémon
 function PokemonBattle(data) {
     const sprite = document.getElementById("player-sprite");
-    sprite.src = data.sprites.back_default;
+    sprite.src = data.sprites.back_default;// les sprites 3d sont dans other.home.
     sprite.alt = data.name;
 
     //affichage du nom du pokémon
@@ -107,9 +107,18 @@ function PokemonBattle(data) {
                 sprite.classList.add("attack");
                 wildPokemonSprite.classList.add("damaged");
 
-                    //le pokémon du joueur attaque le pokémon sauvage
-                    const damage = Math.floor(Math.random() * 10);
-                    wildActualHp -= damage;
+                    //le pokémon du joueur attaque le pokémon sauvage avec sa stat attack
+                    const damage = data.stats[1].base_stat;
+                    //les damage sont réduit par la stat defense du pokémon sauvage
+                    const wilddefense = wild_data.stats[2].base_stat;
+                    //on soustrait les damage à la defense
+                    const damageDone = damage - wilddefense;
+                    if (damageDone < 0) {
+                        //si les damage sont inférieur à la defense, on ne fait pas de dégats
+                        narrator.textContent = `${data.name} utilise ${attack1.textContent} mais ${wild_data.name} résiste !`;
+                    }
+                    else {
+                    wildActualHp -= damageDone;
                     wildHp.textContent = wildActualHp + " / " + wild_data.stats[0].base_stat;
                     wildHpBar.style.width = (wildActualHp / wild_data.stats[0].base_stat) * 100 + "%";
                     //si les pv du pokémon sont inférieurs à 50% on change la couleur de la barre de vie
@@ -134,18 +143,28 @@ function PokemonBattle(data) {
                         }, 2000);
 
                     }
+                }//fin else damage > defense
                         
 
                 setTimeout(() => {
                     
                 narrator.textContent = `${wildPokemonName.textContent} utilise ${randomWildAttacks[0].move.name} !`;
-                 //animation de l'attaque sur le sprite du pokémon sauvage
+                //animation de l'attaque sur le sprite du pokémon sauvage
                 wildPokemonSprite.classList.add("attack");
                 sprite.classList.add("damaged");
 
-                    //le pokémon sauvage inflige des dégats
-                    const wilddamage = Math.floor(Math.random() * 10);
-                    actualHp -= wilddamage;
+                    //le pokémon sauvage inflige des dégats au pokémon du joueur avec sa stat attack
+                    const wilddamage = wild_data.stats[1].base_stat;
+                    //les damage sont réduit par la stat defense du pokémon du joueur
+                    const defense = data.stats[2].base_stat;
+                    //on soustrait les damage à la defense
+                    const wilddamageDone = wilddamage - defense;
+                    if (wilddamageDone < 0) {
+                        //si les damage sont inférieur à la defense, on ne fait pas de dégats
+                        narrator.textContent = `${wild_data.name} utilise ${randomWildAttacks[0].move.name} mais ${data.name} résiste !`;
+                    }
+                    else {
+                    actualHp -= wilddamageDone;
                     hp.textContent = actualHp + " / " + data.stats[0].base_stat;
                     hpBar.style.width = (actualHp / data.stats[0].base_stat) * 100 + "%";
                     //si les pv du pokémon sont inférieurs à 50% on change la couleur de la barre de vie
@@ -169,6 +188,7 @@ function PokemonBattle(data) {
                             window.location.href = `defeat.html?username=${username}&pokemon=${pokemon}`;
                         }, 2000);
                     }
+                }//fin du else des damage > defense
                     
 
                 }, 3000);
@@ -404,8 +424,6 @@ function PokemonBattle(data) {
             
 
         }
-
-        
 
             //affichage des pv du pokémon sauvage
             var wildHp = document.getElementById("wild-hp");
