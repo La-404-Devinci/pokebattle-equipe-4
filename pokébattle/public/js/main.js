@@ -71,12 +71,110 @@ function PokemonBattle(data) {
         const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
         randomAttacks.push(randomAttack);
     }
-    //affichage des attaques
-    attack1.textContent = randomAttacks[0].move.name;
-    attack2.textContent = randomAttacks[1].move.name;
-    attack3.textContent = randomAttacks[2].move.name;
-    attack4.textContent = randomAttacks[3].move.name;
 
+    
+
+    //si le pokemon n'a qu'une attaque les attaques 2, 3 et 4 sont vides par ex pr ditto qui n'a qu'une attaque
+    if (randomAttacks[0].move.name == randomAttacks[1].move.name && randomAttacks[0].move.name == randomAttacks[2].move.name && randomAttacks[0].move.name == randomAttacks[3].move.name) {// si les 4 attaques sont identiques
+    attack1.textContent = randomAttacks[0].move.name;//on affiche une seule fois l'attaque
+    attack2.textContent = "";//les autres attaques sont vides
+    attack3.textContent = "";
+    attack4.textContent = "";
+
+
+    //si une attaque est identique à une des trois autres, on en prend une autre aléatoirement
+    } else if (randomAttacks[0].move.name == randomAttacks[1].move.name) {//si attaque 1 = attaque 2
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[1] = randomAttack;//remplace attaque 2 par une autre aléatoire générée par randomAttack
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+
+    } else if (randomAttacks[0].move.name == randomAttacks[2].move.name) {//si attaque 1 = attaque 3
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[2] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+
+    } else if (randomAttacks[0].move.name == randomAttacks[3].move.name) {//si attaque 1 = attaque 4
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[3] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+        
+    } else if (randomAttacks[1].move.name == randomAttacks[0].move.name) {//si attaque 2 = attaque 1
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[0] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;    
+
+    } else if (randomAttacks[1].move.name == randomAttacks[2].move.name) {//si attaque 2 = attaque 3
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[2] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+
+    } else if (randomAttacks[1].move.name == randomAttacks[3].move.name) {//si attaque 2 = attaque 4
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[3] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+
+    } else if (randomAttacks[2].move.name == randomAttacks[0].move.name) {//si attaque 3 = attaque 1
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[0] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+
+    } else if (randomAttacks[2].move.name == randomAttacks[1].move.name) {//si attaque 3 = attaque 2
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[1] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+        
+
+    } else if (randomAttacks[2].move.name == randomAttacks[3].move.name) {//si attaque 3 = attaque 4
+        const randomAttack = attacks[Math.floor(Math.random() * attacks.length)];
+        randomAttacks[3] = randomAttack;
+        //on affiche les attaques si elles sont différentes
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+
+
+
+    } else {// si aucune attaque n'est identique, on affiche les attaques
+        attack1.textContent = randomAttacks[0].move.name;
+        attack2.textContent = randomAttacks[1].move.name;
+        attack3.textContent = randomAttacks[2].move.name;
+        attack4.textContent = randomAttacks[3].move.name;
+    }
+
+        
 
     //pokemon sauvage
     const wildPokemonSprite = document.getElementById("wild-sprite");
@@ -89,7 +187,13 @@ function PokemonBattle(data) {
     fetch(wildPokemonUrl)
         .then(response => response.json())
         .then( wild_data => {
+            //une chance sur 8192 de tomber sur un pokémon shiny avec le sprite shiny
+            const randomShiny = Math.floor(Math.random() * 8192);
+            if (randomShiny === 1) {
+                wildPokemonSprite.src = wild_data.sprites.front_shiny;
+            } else {
             wildPokemonSprite.src = wild_data.sprites.front_default;
+            }
             wildPokemonSprite.alt = wild_data.name;
             wildPokemonName.textContent = wild_data.name;
         //on récupère les attaques du pokémon sauvage
@@ -102,6 +206,21 @@ function PokemonBattle(data) {
 
             // à chaque fois qu'on clique sur une attaque 
             attack1.addEventListener("click", () => {
+                if (attack1.textContent == "transform") {
+                    sprite.src = wild_data.sprites.back_default;
+                    
+                    setTimeout(() => {
+                        narrator.textContent = `${data.name} se transforme en ${wild_data.name} !`;
+                    }, 2000);
+
+                    //après que le pokémon se soit transformé, il prend les attaques du pokémon sauvage et l'utilise
+                    attack1.textContent = randomWildAttacks[0].move.name;
+                    attack2.textContent = randomWildAttacks[1].move.name;
+                    attack3.textContent = randomWildAttacks[2].move.name;
+                    attack4.textContent = randomWildAttacks[3].move.name;
+                    
+                
+                } else {//si l'attaque n'est pas transform alors on attaque
                 narrator.textContent = `${data.name} utilise ${attack1.textContent} !`;
                 //animation de l'attaque sur le sprite du pokémon du joueur
                 sprite.classList.add("attack");
@@ -144,6 +263,7 @@ function PokemonBattle(data) {
 
                     }
                 }//fin else damage > defense
+                
                         
 
                 setTimeout(() => {
@@ -188,14 +308,20 @@ function PokemonBattle(data) {
                             window.location.href = `defeat.html?username=${username}&pokemon=${pokemon}`;
                         }, 2000);
                     }
+                
                 }//fin du else des damage > defense
-                    
+                
+                
 
                 }, 3000);
                 setTimeout(() => {
                     narrator.textContent = `Choisis une attaque !`;
                 }, 6000);
+            }//fin du else si l'attaque est tranform
+        
             });
+
+
             attack2.addEventListener("click", () => {
                 narrator.textContent = `${data.name} utilise ${attack2.textContent} !`;
                 //animation de l'attaque sur le sprite du pokémon du joueur
@@ -228,9 +354,6 @@ function PokemonBattle(data) {
                         setTimeout(() => {
                         window.location.href = `victory.html?username=${username}&pokemon=${pokemon}`;
                         }, 2000);
-
-                        
-                        
                     
                     }
 
@@ -522,6 +645,9 @@ function PokemonBattle(data) {
 
 }
 
+
+//on masque l'url
+//window.history.pushState({}, document.title, "/" + "pokemon-game" + "/");
 
 
 
